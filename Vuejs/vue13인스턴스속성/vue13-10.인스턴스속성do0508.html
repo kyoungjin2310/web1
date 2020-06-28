@@ -70,15 +70,29 @@
     var vm = new Vue({
         el: "#app",//대상선택
         data: {
-            methodscopy: txt,
-            watchcopy: txt,
-            computedcopy: txt
+            message : '', 
+            methodscopy : '',  
+            watchcopy : '',  
         },
         methods: {
             reverseMsg: function (event) {//꼭 event 넣기
-                console.log(event.target.value)//event.target 자주씀
+                var msg = this.$data.message
+                this.$data.methodscopy = msg.split('').reverse().join('')
             }
         },
+        watch: {
+            message: function (data) {
+                var msg = this.$data.message
+                this.$data.watchcopy = msg.split('').reverse().join('')
+            }
+        },
+        computed: {
+            computedcopy : function () {
+                var msg = this.$data.message
+                return this.$data.computedcopy = msg.split('').reverse().join('')
+            }
+        }
+        
     });
 
 </script>
