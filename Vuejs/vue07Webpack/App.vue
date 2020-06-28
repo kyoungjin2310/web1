@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header-comp></header-comp>
-    
+
     <div class="row">
       <!-- 여기 컨텐츠 -->
       <section id="page1" data-role="page">
@@ -12,18 +12,17 @@
     <footer-comp></footer-comp>
   </div>
 </template>
-
 <script>
-import Header from "./Header.vue";
-import Footer from "./Footer.vue";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default {
   data() {
     return {
-      msg: "Hello VueJS"
+      msg: "hello"
     };
   },
-  components: {
+  component: {
     "header-comp": Header,
     "footer-comp": Footer
   }

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../css/reset.css">
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 
 </head>
 
@@ -22,6 +22,7 @@
         Vue Reactivity의 동작 원리에 대해서 배운다.
 
         Object.defineProperty()를 이용해서 양방향 바인딩의 개녕을 익힌다.
+        <!-- https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty -->
         Object.defineProperty() 메서드의 get, set 설정 방법을 학습한다.
 
         F12 로 개발자 도구를 열고 console 창에 아래 순으로 입력한다.
@@ -35,8 +36,10 @@
 
         [참조]page 178
     </xmp>
-    <hr>
+    <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"
+        target="_blank" title="새창">Object.defineProperty()</a>
 
+    <hr>
     <h1>Vue Reactivity의 동작 원리</h1>
 
     <hr color="red">
@@ -63,3 +66,31 @@
 </body>
 
 </html>
+
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    var vm1 = new Vue({
+        el: "#app",//대상선택
+        data: {
+            msg: "Hello",
+        }//속성
+    });
+
+    var div = document.getElementById('app2')
+    var data = {};
+    Object.defineProperty(data, 'msg', {
+        get: function () {
+            return div.innerHTML;
+        },
+        set: function (val) {//-> = "" 의 값 출력
+            //debugger; -> break point
+            div.innerHTML = val;
+        },
+    })
+
+    data["msg"] = "123";//쓰는 방법1
+    data.msg = "abc";//쓰는 방법2
+    //debugger시 변수 값 보는 방법1 -> watch에 등록
+    //debugger시 변수 값 보는 방법2 -> 개발자 도구에서 마우스 올리기
+    console.log(data.msg);
+</script>
