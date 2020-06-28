@@ -1,0 +1,19 @@
+Vue
+인스턴스, 지시자, 컴포넌트
+
+1. 개발환경 설치
+git 설치
+Totorisegit 64
+
+node.js
+vue cli
+
+vue 개발자 도구 설치
+vsc insider 설치
+- 플러그인 설치
+
+1-1. git
+- 소스공유 + 이력 관리(서버-> 엑셀, 워드, psd 등등)
+
+1-2. Totorisegit(window 용)
+-> git 클라이언트
