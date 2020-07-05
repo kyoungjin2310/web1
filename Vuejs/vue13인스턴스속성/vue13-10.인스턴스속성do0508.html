@@ -66,13 +66,13 @@
 </html>
 
 <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
-<script>
+<!-- <script>
     var vm = new Vue({
         el: "#app",//대상선택
         data: {
-            message : '', 
-            methodscopy : '',  
-            watchcopy : '',  
+            message: '',
+            methodscopy: '',
+            watchcopy: '',
         },
         methods: {
             reverseMsg: function (event) {//꼭 event 넣기
@@ -87,12 +87,45 @@
             }
         },
         computed: {
-            computedcopy : function () {
+            computedcopy: function () {
                 var msg = this.$data.message
-                return this.$data.computedcopy = msg.split('').reverse().join('')
+                return msg.split('').reverse().join('')
             }
         }
-        
+
     });
 
+</script> -->
+<script>
+    new Vue({
+        el: "#app",
+        data: {//뒤에 사용할 변수 지정 v- 붙어있는경우는 data에 추가(이벤트는 제외)
+            message: "Hello, Vue.js",
+            methodscopy: "",
+            watchcopy: "",
+            // computedcopy: "", computed 속성과 중복해서 사용 불가
+        },
+        template: null,
+        methods: {
+            reverseMsg: function (e) {
+                var aa = this.message.split('').reverse().join('');
+                //this.message = aa;//단순 데이터 타입에 쓰기
+                this.$set(this.$data, 'message', aa)//배열, 참조 타입일때는 꼭쓰기, 속성은 따옴표 처리
+                this.$data.methodscopy = aa;
+            },
+        },
+        watch: {
+            message: function (val) {//값 모니터링할 객체를 function으로 씀
+                console.log("message값이 바뀐다")
+                this.$data.watchcopy = val;
+            }
+
+        },
+        computed: {
+            computedcopy: function () {
+                return this.message;
+            }
+
+        },
+    })
 </script>

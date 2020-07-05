@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,10 @@
     <link rel="stylesheet" href="../css/reset.css">
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 
 </head>
+
 <body>
     <pre>
 
@@ -44,5 +46,17 @@
     </div>
 
 </body>
+
 </html>
-
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            contacts: [
+                { name: '서현', tel: '010-3456-2289', address: "서현" },
+                { name: '혜리', tel: '010-3456-2289', address: "서리" },
+            ],
+        }
+    })
+</script>

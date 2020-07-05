@@ -40,7 +40,7 @@
     </style>
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 
 </head>
 
@@ -74,7 +74,7 @@
             <li><a class="image3" href="../images/image4.jpg" v-on:click="imageclick"> 고양이 사진 </a></li>
         </ul>
 
-        <img id="img2" v-bind:src="img_image3"  />
+        <img id="img2" v-bind:src="img_image3" />
         <hr>
 
         <pre>
@@ -83,10 +83,9 @@
 이미지 위에 마우스를 올리면(mouseover) ==> ../images/but2.gif , ../images/img_swap_on.png
 이미지 위에 마우스를 내리면(mouseout ) ==> ../images/but1.gif , ../images/img_swap_off.png
         </pre>
-        <img v-bind:src="img_but1[0]" id="but1"     v-on:mouseover="imageover" v-on:mouseout="imageout" />
+        <img v-bind:src="img_but1[0]" id="but1" v-on:mouseover="imageover" v-on:mouseout="imageout" />
         <img v-bind:src="img_swap[0]" id="img-swap" v-on:mouseover="imageover" v-on:mouseout="imageout" />
         <hr>
-
         <pre>
 박스에 mouseover 시 background-color를 yellow로
 박스에 mousedown 시 background-color를 blue로
@@ -94,9 +93,12 @@
 박스에 mouseout  시 background-color를 red로
         </pre>
 
-        <span v-on:mouseover="spanmouseover" v-on:mousedown="spanmousedown"  v-on:mouseup="spanmouseup" v-on:mouseout="spanmouseout"></span>
-        <span v-on:mouseover="spanmouseover" v-on:mousedown="spanmousedown"  v-on:mouseup="spanmouseup" v-on:mouseout="spanmouseout"></span>
-        <span v-on:mouseover="spanmouseover" v-on:mousedown="spanmousedown"  v-on:mouseup="spanmouseup" v-on:mouseout="spanmouseout"></span>
+        <span v-on:mouseover="spanmouseover" v-on:mousedown="spanmousedown" v-on:mouseup="spanmouseup"
+            v-on:mouseout="spanmouseout"></span>
+        <span v-on:mouseover="spanmouseover" v-on:mousedown="spanmousedown" v-on:mouseup="spanmouseup"
+            v-on:mouseout="spanmouseout"></span>
+        <span v-on:mouseover="spanmouseover" v-on:mousedown="spanmousedown" v-on:mouseup="spanmouseup"
+            v-on:mouseout="spanmouseout"></span>
         <hr>
 
         <pre>
@@ -119,5 +121,56 @@ select 에 change 이벤트 핸들러를 작성하시오.
 
 </html>
 
-
-
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            img_image3: "",
+            img_select: "../images/apple.gif",
+            img_but1: ["../images/but1.gif", "../images/but2.gif"],
+            img_swap: ["../images/img_swap_off.png", "../images/img_swap_on.png"]
+        },
+        methods: {
+            imageclick: function (event) {
+                this.$data.img_image3 = event.target.href
+                //<a href> 값가져오기 => event.target.href 
+                //a 리다이렉트 취소
+                event.preventDefault();
+                event.stopPropagation();
+            },//e 똑같이 적어야함, e, event 이렇게 쓰면 작동안함
+            imageover: function (event) {
+                if (event.target.id === "but1") {
+                    event.target.src = this.$data.img_but1[1]
+                } else if (event.target.id === "img-swap") {
+                    event.target.src = this.$data.img_swap[1]
+                }
+            },
+            imageout: function (event) {
+                if (event.target.id === "but1") {
+                    event.target.src = this.$data.img_but1[0]
+                } else if (event.target.id === "img-swap") {
+                    event.target.src = this.$data.img_swap[0]
+                }
+            },
+            spanmouseover: function (event) {
+                event.target.style.backgroundColor = "yellow"
+                //다른 방법
+                //var obj = { backgroundColor:"yellow", fontSize : "20pt"}
+                //event.target.style = obj;
+            },
+            spanmousedown: function (event) {
+                event.target.style.backgroundColor = "blue"
+            },
+            spanmouseup: function (event) {
+                event.target.style.backgroundColor = "pink"
+            },
+            spanmouseout: function (event) {
+                event.target.style.backgroundColor = "red"
+            },
+            selectchange: function (event) {
+                this.$data.img_select = event.target.value
+            }
+        },
+    })
+</script>

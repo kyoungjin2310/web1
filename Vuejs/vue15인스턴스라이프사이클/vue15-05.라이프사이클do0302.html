@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,10 @@
     <link rel="stylesheet" href="../css/reset.css">
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 
 </head>
+
 <body>
     <pre>
 
@@ -24,12 +26,45 @@
 		
 		mounted 단계는 화면의 일부분이 새로고침(렌더링)되는 것을 의미한다. 
 
+        1. 버튼 만들고 클릭 이벤트 설정
+        2. 버튼 클릭하면 message값을 자신의 이름으로 바꿈
         [참조]page 49
     </pre>
     <hr>
 
     <div id="app">
         {{ message }}
+        <button v-on:click="msg">Btn</button>
     </div>
 </body>
+
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            message: "Hello",
+        },
+        template: null,
+        methods: {
+            msg: function () {
+                this.$data.message = "오경진"
+            }
+        },
+        components: null,
+        computed: {},
+        watch: {},
+        ///life cycle: create -> mount -> update -> destroy
+        //Alt+ shift + 복사 끝 지점 => 복사 
+        //Ctrl + Alt + 아래화살 키 => 같이 입력
+        beforeCreate: function () { console.log("beforeCreate") },
+        created: function () { console.log("created") },
+        beforeMount: function () { console.log("beforeMount") },
+        mounted: function () { console.log("mounted") },
+        beforeUpdate: function () { console.log("beforeUpdate") },//값을 바꾸면 뜸
+        updated: function () { console.log("updated") },//값을 바꾸면 뜸
+        beforeDestroy: function () { console.log("beforeDestroy") },
+        destroyed: function () { console.log("destroyed") },
+    })
+</script>
