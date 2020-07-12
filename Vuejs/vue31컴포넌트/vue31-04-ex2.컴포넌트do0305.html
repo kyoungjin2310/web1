@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +13,19 @@
     <link rel="stylesheet" href="../css/reset.css">
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 
 </head>
+
 <body>
     <xmp>
-Vue 컴포넌트 만드는 방법을 배운다.
+        Vue 컴포넌트 만드는 방법을 배운다.
 
-Vue의 전역 컴포넌트와 지역 컴포넌트 만드는 방법을 배운다.
-
+        2개의 전역 컴포넌트를 만든다.
+        - my-global-component
+        - my-local-component
+        my-global-component의 template:<div> g 콤포넌트</div>
+        my-local-component의 template:<div> l 콤포넌트</div>
         [참조]page 57
     </xmp>
     <hr>
@@ -35,4 +40,40 @@ Vue의 전역 컴포넌트와 지역 컴포넌트 만드는 방법을 배운다.
     </div>
 
 </body>
+
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    Vue.component("my-global-component", {
+        name: "",
+        props: [],
+        data: function () {
+            return {
+
+            }
+        },
+        template: `
+           <div> g 콤포넌트</div>
+        `,
+    });
+    Vue.component("my-local-component", {
+        name: "",
+        props: [],
+        data: function () {
+            return {
+
+            }
+        },
+        template: `
+           <div> l 콤포넌트</div>
+        `,
+    });
+    //반드시 new Vue(인스턴스)는 마지막에, 순서가 중요함
+    new Vue({
+        el: "#app",
+        data: {
+
+        },
+        //전역인경우에 component는 필요 없음, 지역만 필요함
+    });
+</script>
