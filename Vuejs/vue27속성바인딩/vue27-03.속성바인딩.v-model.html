@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,26 +13,27 @@
         .container {
             color: red;
             font-weight: bold;
-            font-size:  20pt;
+            font-size: 20pt;
         }
     </style>
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 
 </head>
+
 <body>
     <xmp>
 
         v-model 디렉티브에 대해서 알아본다.
 
         [1] v-model 디렉티브 :
-            양방향 데이터 바인딩이 필요한 경우에 사용.
+        양방향 데이터 바인딩이 필요한 경우에 사용.
 
-            사용 예시)
-            v-model:checked
-            v-model:value
-            v-model:selected
+        사용 예시)
+        v-model:checked
+        v-model:value
+        v-model:selected
 
         [참조]page
     </xmp>
@@ -103,4 +105,25 @@
         </div>
     </div>
 </body>
+
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el: "#app3",
+        data: {
+            name: null,
+            message: null,
+            checked: null,
+            checkedNames: [],//배열로 안하면 변수 이름이 같아서 같이 움직임 => 여러개 값이므로 배열로 작성
+            Picked: null,
+            selected: null,
+            options: [
+                { text: "One", value: "A" },
+                { text: "Two", value: "B" },
+                { text: "Three", value: "C" }
+            ]
+        }
+    })
+    //속성없이 v-model만 사용가능
+</script>

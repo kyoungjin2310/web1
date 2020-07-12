@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../css/reset.css">
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 </head>
 
 <body>
@@ -24,12 +24,12 @@
 
         single style binding:
         new Vue({
-            data : {
-                baseStyles: {
-                    fontWeight:'800',
-                    color: 'red'
-                },
-            },
+        data : {
+        baseStyles: {
+        fontWeight:'800',
+        color: 'red'
+        },
+        },
         });
         <p v-bind:style="baseStyles">
             baseStyles and overrideStyles
@@ -37,15 +37,15 @@
 
         multi style binding:
         new Vue({
-            data : {
-                baseStyles: {
-                    fontWeight:'800',
-                    color: 'red'
-                },
-                overrideStyles: {
-                    color:'blue'
-                },
-            },
+        data : {
+        baseStyles: {
+        fontWeight:'800',
+        color: 'red'
+        },
+        overrideStyles: {
+        color:'blue'
+        },
+        },
         });
         <p v-bind:style="[baseStyles, overrideStyles]">
             baseStyles and overrideStyles
@@ -101,3 +101,30 @@
 </body>
 
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el: "#example2",
+        data: {
+            myColor: {
+                backgroundColor: "aqua",
+                color: "purple"
+            },
+            myLayout: {
+                width: "150px",
+                height: "80px",
+                textAlign: "center"
+            }
+        }
+    })
+    new Vue({
+        el: "#example3",
+        data: {
+            mystyle: {
+                set1: null,
+                set2: null,
+                set3: null
+            }
+        }
+    })
+</script>

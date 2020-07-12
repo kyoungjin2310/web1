@@ -1,31 +1,87 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
-        img { padding:5px; width:130px; height:130px; border:1px solid gray; }
+        img {
+            padding: 5px;
+            width: 130px;
+            height: 130px;
+            border: 1px solid gray;
+        }
     </style>
 </head>
+
 <body>
-	<pre>
+    <pre>
 		연습 문제. 직접 작성하여 본다. 
 		html 태그에 Vue 지시지 작성을 연습하는 예제입니다.
-		Vue 지시자를 설정하시오. 
+        Vue 지시자를 설정하시오. 
+        
+        1. html 속성에 Vue 지시자를 설정하시오
+        img태그 클릭하면 그림 나오게 하기
+        img1 => ../images/im1.jpg
+        img2 => ../images/im2.jpg
+        img3 => ../images/im3.jpg
+        img4 => ../images/im4.jpg
+        img5 => ../images/im5.jpg
+
+        2. 이벤트 핸들러와 지시자 작성
+        "img 태그를 클릭하면" 이벤트 핸들러 작성도 필요.
 	</pre>
     <h2>&lt;img id="" src="" title="" alt="" /&gt;</h2>
 
-    <h3>어트리뷰트 추가</h3>
-    <img id="img1" src="../images/im1.jpg" title="im1.jpg" alt="im1.jpg" />
-    <img id="img2" />
-    <img id="img3" />
-    <img id="img4" />
-    <img id="img5" title="im5.jpg" />
+    <div id="app">
+        <h3>어트리뷰트 추가</h3>
+        <img id="im1" src="../images/im1.jpg" title="im1.jpg" alt="im1.jpg" v-on:click="clickEvent" />
+        <!-- <img id="im2" v-bind:src="imgSrc" v-on:click="clickEvent" />
+        <img id="im3" v-bind:src="imgSrc" v-on:click="clickEvent" />
+        <img id="im4" v-bind:src="imgSrc" v-on:click="clickEvent" />
+        <img id="im5" v-bind:src="imgSrc" v-on:click="clickEvent" title="im5.jpg" /> -->
+        <img id="im2" v-bind:src="imgSrc.null" v-on:click="clickEvent" />
+        <img id="im3" v-bind:src="imgSrc.null" v-on:click="clickEvent" />
+        <img id="im4" v-bind:src="imgSrc.null" v-on:click="clickEvent" />
+        <img id="im5" v-bind:src="imgSrc.null" v-on:click="clickEvent" title="im5.jpg" />
+        <h3>어트리뷰트 제거</h3>
+        <img id="im6" v-bind:src="imgSrc.im5" title="im5" alt="im5.jpg" v-on:click="clickEvent" />
+    </div>
 
-    <h3>어트리뷰트 제거</h3>
-    <img id="img6" src="../images/im5.jpg" title="im5" alt="im5.jpg" />
 </body>
+
 </html>
 
-<!-- 임포트 -->
+<!-- 임포트 -->
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            //imgSrc: ""
+            imgSrc: {
+                null: "",
+                im1: "./images/im1.jpg",
+                im2: "./images/im2.jpg",
+                im3: "./images/im3.jpg",
+                im4: "./images/im4.jpg",
+                im5: "./images/im5.jpg",
+            }
+        },
+        methods: {
+            clickEvent: function (event) {
+                // var imgNum = "../images/" + event.target.id + ".jpg"
+                // event.target.src = imgNum
+
+                var target = event.target.id;
+                event.target.src = this.$data.imgSrc[target];
+                if (target === "im6") {
+                    event.target.src = this.$data.imgSrc.null;
+                } else {
+                    event.target.src = this.$data.imgSrc[target];
+                }
+            }
+        },
+    })
+</script>

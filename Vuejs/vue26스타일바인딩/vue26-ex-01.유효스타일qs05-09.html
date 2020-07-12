@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../css/reset.css">
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 
     <style>
         .score {
@@ -55,3 +55,30 @@
 </body>
 
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        el: "#example",
+        data: {
+            score: null,//양방향 데이터에 v-model사용
+        },
+        computed: {
+            info: function () {
+                //input.value는 문자열이다.
+                //문자열을 숫자로 형변환
+                var val = Number(this.$data.score);
+                if (1 <= val && val <= 100) {
+                    return {
+                        warning: false
+                    }
+                } else {
+                    return {
+                        warning: true
+                    }
+                }
+                //         this.$data.info = true;
+                //         this.$data.warning = true;
+            }
+        },
+    })
+</script>

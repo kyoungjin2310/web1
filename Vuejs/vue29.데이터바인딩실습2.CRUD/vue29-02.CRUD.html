@@ -80,3 +80,38 @@
 </body>
 
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    //과제
+    new Vue({
+        el: "#app",
+        data: {
+            user: [
+                { name: "", power: 0 }
+            ],
+            list: [
+                { id: "1", name: "슈퍼맨", power: 100 },
+                { id: "2", name: "아쿠아맨", power: 300 },
+                { id: "3", name: "스파이더맨", power: 500 },
+                { id: "4", name: "배트맨", power: 30 }
+            ]
+        },
+        methods: {
+            insert: function (event) {
+                //입력값 user에 있다
+                console.log(this.$data.user);
+                var user = this.$data.user;
+
+                //user에 id 추가
+                user.id = "this.$data.list의 max값을 넣으시오"
+
+                //user를 this.$data.list 에 추가하시오.
+                //참조 타입 변수이면 재할당(=== 깊은 복사) 필요.
+                //1. Vue.set()
+                //2. Array.concat()
+                //3. spread 연산자
+                Vue.set(this.$data.list, this.$data.list.length, user)
+            }
+        },
+    })
+</script>

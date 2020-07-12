@@ -131,11 +131,76 @@
 </body>
 
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
 <script>
-    var target = document.getElementById("eljvs");
-    var css1 = { backgroundColor: "purple", fontColor: "yellow" }
+    new Vue({
+        el: "#elvue",
+        data: {
+            style1: null
+        },
+        methods: {
+            overEvent: function (event) {
+                this.$data.style1 = {
+                    backgroundColor: "purple",
+                    color: "yellow"
+                }
+            },
+            outEvent: function (event) {
+                this.$data.style1 = {
+                    backgroundColor: "aqua",
+                    color: "black"
+                }
+            }
+        }
+    })
+    new Vue({
+        el: "#example3",
+        data: {
+            style1: null
+        },
+        methods: {
+            clickArrow: function () {
+                this.$data.style1 = {
+                    height: "50px",
+                    width: "150px",
+                    border: "1px solid black",
+                    textAlign: "center",
+                    lineHeight: "50px",
+                    fontWeight: "800",
+                    color: "red",
+                    backgroundColor: "darkgoldenrod",
+                    padding: "50px"
+                }
+            }
+        }
+    })
+    //자바스크립트로 이벤트 기능 구현
+    function overEvent(event) {
+        console.log("overEvent", event, event.target);
+        //중요!!!!!!!!!!!!!이벤트 타겟 안먹히면 써보기 -> this를 인자로 쓰면 event.target이 안먹힘
+        //첫번째        
+        event.style.backgroundColor = "purple"
+        event.style.color = "yellow"
+        /* 두번째 -> 기존 style이 삭제됨
+        event.target.style = {
+            backgroundColor: "purple", color: "yellow"
+        }
+        
+        obj 합치기
+        1. Object.assign() 메서드 방식
+        2. spread 연산자방식
+        3. jQuery.extend() 메서드 방식
+        4.  JSON.strige
+        */
 
-    function outEvent() {
-        target.style.css1
+        Object.assign(event.target.style, {
+            backgroundColor: "purple", color: "yellow"
+        })
+
+    }
+    function overOut(event) {
+        console.log("overEvent", event, event.target);
+        event.style.backgroundColor = "aqua"
+        event.style.color = "black"
     }
 </script>

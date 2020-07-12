@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,25 +13,29 @@
     <link rel="stylesheet" href="../css/reset.css">
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
+
 
 </head>
+
 <body>
     <xmp>
         Vue 컴포넌트 만드는 방법을 배운다.
 
         컴포넌트는
-            재사용 가능한 코드
-            template을 보완하여 만든 요소다.
-            Vue 컴포넌트는 인스턴스의 모든 옵션을 사용할 수 있다
-            여러개의 Component 사용이 가능하다.
+        재사용 가능한 코드
+        template을 보완하여 만든 요소다.
+        Vue 컴포넌트는 인스턴스의 모든 옵션을 사용할 수 있다
+        여러개의 Component 사용이 가능하다.
 
         왜 컴포넌트를 사용하는가?
-            컴포넌트를 재사용하기 위해서.
+        컴포넌트를 재사용하기 위해서.
 
         [참조]
-            교재 page 52~61, 65
-            https://kr.vuejs.org/v2/guide/components.html
+        교재 page 52~61, 65
+        https://kr.vuejs.org/v2/guide/components.html
+
+        지역컴포넌트의 button에 아래의 style을 설정한다
+
     </xmp>
     <hr>
 
@@ -45,4 +50,64 @@
     </div>
 
 </body>
+
 </html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    //전역 컴포넌트는 인스턴스 앞에 만든다.
+    //전역 컴포넌트 만들기 : Vue.comment() 사용
+    // Vue.comment("컴포넌트 이름", {
+    //     //컴포넌트 속성
+    //     //name
+    //     //props
+    //     //data
+    //     //tamplate
+    // })
+    Vue.component("global-component", {
+        props: ['propsdata'],
+        //propsdata: null,
+        data: function () {//data를 반드시 funtion으로 꼭 쓰기
+            return {
+
+            }
+        },
+        template: `
+        <div>
+            전역 컴포넌트
+            <button v-on:click="gclick">{{propsdata}}</button>
+        </div>
+        `,
+    })
+    var localcomp = {
+        name: "local-component",
+        props: ["localmsg"],
+        data: function () {///해당컴포넌트 안에서만 사용
+            return {
+                style1: {
+                    border: "1px dashed blue",
+                    padding: "3px"
+                }
+            };
+        },
+        template: `
+        <div>
+            지역 컴포넌트
+            <span v-bind:style="style1" v-on:click="gclick">{{localmsg}}</span>
+        </div>
+        `,
+    }
+    new Vue({
+        el: "#app",
+        data: {
+            globalmsg1: "인스턴스에서 전역 컴포넌트로 넘겨지는 값 1",
+            globalmsg2: "인스턴스에서 전역 컴포넌트로 넘겨지는 값 2",
+            localmsg1: "인스턴스에서 지역 컴포넌트로 넘겨지는 값 1",
+            localmsg2: "인스턴스에서 지역 컴포넌트로 넘겨지는 값 2"
+        },
+        components: {
+            "local-component": localcomp,
+            "local-component": localcomp
+        }
+    })
+
+</script>
