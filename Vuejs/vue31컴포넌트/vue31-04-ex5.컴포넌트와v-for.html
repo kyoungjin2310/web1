@@ -63,15 +63,23 @@
 <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
 <script>
     Vue.component("component-box", {
-        name: "",
-        props: [],
+        props: ["num"],
         data: function () {
             return {
-
+                style1: {
+                    display: "inline - block",
+                    fontSize: "3em",
+                    border: "1px dashed blue",
+                    padding: "10px 20px",
+                    margin: "5px",
+                    textAlign: "center"
+                }
             }
         },
         template: `
-        
+         <span v-bind:style="style1">
+            {{num}}
+         </span>
         `,
     })
     new Vue({
@@ -80,9 +88,10 @@
             arr: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         },
         methods: {
-            clickAddBox: function () {
-
+            clickAddBox: function (event) {
+                Vue.set(this.$data.arr, this.$data.arr.length, this.$data.arr.length)
             }
         },
     })
 </script>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>

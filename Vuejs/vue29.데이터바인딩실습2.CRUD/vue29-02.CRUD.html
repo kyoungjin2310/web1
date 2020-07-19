@@ -68,10 +68,10 @@
                 <td>{{man.name}}</td>
                 <td>{{man.power}}</td>
                 <td>
-                    <button v-on:click="doDel(index)">Del</button>
-                    <button v-on:click="doUp(index)">Power Up</button>
-                    <button v-on:click="doDown(index)">Power Down</button>
-                    <button v-on:click="doEdit(index)">Edit</button>
+                    <button v-on:click="doUp(man.id, index)">Power Up</button>
+                    <button v-on:click="doDown(man.id, index)">Power Down</button>
+                    <button v-on:click="doEdit(man.id, index)">Edit</button>
+                    <button v-on:click="doDel(man.id, index)">Del</button>
                 </td>
             </tr>
         </table>
@@ -82,36 +82,109 @@
 </html>
 <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
 <script>
-    //과제
     new Vue({
         el: "#app",
         data: {
-            user: [
-                { name: "", power: 0 }
-            ],
+            user: {
+                id: null,
+                name: null,
+                power: 0
+            },
             list: [
-                { id: "1", name: "슈퍼맨", power: 100 },
-                { id: "2", name: "아쿠아맨", power: 300 },
-                { id: "3", name: "스파이더맨", power: 500 },
-                { id: "4", name: "배트맨", power: 30 }
-            ]
+                { id: 1, name: "슈퍼맨", power: 100 },
+                { id: 2, name: "아쿠아맨", power: 300 },
+                { id: 3, name: "스파이더맨", power: 500 },
+                { id: 6, name: "배트맨", power: 30 },
+            ],
         },
         methods: {
             insert: function (event) {
-                //입력값 user에 있다
+                // 입력값은 user 에   있다.
                 console.log(this.$data.user);
                 var user = this.$data.user;
+                /* 
+                user 에 id 프로퍼티 추가
+                // max(id)를 찾는 방법 ==> reduce() 메서드 사용.
+                // reduce() 메서드 사용하여 max 찾기
+                // prev = {id:2,  name:"", power: 200 }
+                // next = {id:1,  name:"", power: 300 }
+                var obj = array.reduce( function(prev, next){
+                    return prev.id > next.id ? prev:  next ; // 최대값 id가 있는 객체 
+                    return prev.id < next.id ? prev:  next ; // 최소값 id가 있는 객체 
+                });
+                */
+                var maxObj = this.$data.list.reduce(function (prev, next) {
+                    return prev.id > next.id ? prev : next;
+                });
 
-                //user에 id 추가
-                user.id = "this.$data.list의 max값을 넣으시오"
+                if (maxObj) {
+                    user.id = maxObj.id + 1;
+                } else {
+                    user.id = 1;
+                }
 
-                //user를 this.$data.list 에 추가하시오.
-                //참조 타입 변수이면 재할당(=== 깊은 복사) 필요.
-                //1. Vue.set()
-                //2. Array.concat()
-                //3. spread 연산자
-                Vue.set(this.$data.list, this.$data.list.length, user)
-            }
+                console.log(maxObj);
+
+                // user 객체 id 프러퍼티와 값 추가
+                // user = {name:?, power: ? }
+                user.id = maxObj.id + 1; // {eid:?, name:?, power: ? }
+
+                // user를 this.$data.list 에 추가하시오. 
+                // 참조 타입 변수이면 재할당(=== 깊은 복사) 필요.
+                // 1. Vue.set()
+                // 2. Array.concat()
+                // 3. spread 연산자
+                Vue.set(this.$data.list, this.$data.list.length, user);
+            },
+            doUp: function (userid, index) {
+                console.log(userid, index);// event === user.id 
+
+                var users = this.$data.list.filter(function (el) {
+                    return el.id == this ? el : null; // this == userid 
+                }, userid);
+                console.log(users); // users == 배열, user== 객체 
+
+                var user = users[0];
+                user.power = Number(user.power) + 100;
+
+                // this.$data.list 수정
+                // 참조 타입 변수이면 재할당(=== 깊은 복사) 필요.
+                // 1. Vue.set()
+                // 2. Array.concat()
+                // 3. spread 연산자
+                Vue.set(this.$data.list, index, user);
+            },
+            doDown: function (userid, index) {
+                console.log(userid, index);// event === user.id 
+
+                var users = this.$data.list.filter(function (el) {
+                    return el.id == this ? el : null; // this == userid 
+                }, userid);
+                console.log(users); // users == 배열, user== 객체 
+
+                var user = users[0];
+                user.power = Number(user.power) - 50;
+
+                // this.$data.list 수정
+                // 참조 타입 변수이면 재할당(=== 깊은 복사) 필요.
+                // 1. Vue.set()
+                // 2. Array.concat()
+                // 3. spread 연산자
+                Vue.set(this.$data.list, index, user);
+
+            },
+            doEdit: function (userid, index) {
+                console.log(userid, index);
+
+                this.$data.user = this.$data.list[index];// this.$data.user.id 프로퍼티가 없다
+            },
+            doDel: function (userid, index) {
+                console.log(userid, index);
+                //this.$data.list 에서 삭제
+                //array.splice() 사용 =>내부적으로 깊은복사 (deep copy) 사용
+                this.$data.list.splice(index, 1)//this.$data.list.splice의 index에서 한개를 삭제
+            },
         },
     })
+
 </script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,10 @@
     <link rel="stylesheet" href="../css/reset.css">
 
     <!-- vue 스크립트 플러그인 임포트   -->
-        
+
 
 </head>
+
 <body>
     <pre>
 
@@ -32,13 +34,41 @@
       [참조]page 62~75
     </pre>
 
-      <img src="../images/components_parent_child.png" alt="" srcset="">
+    <img src="../images/components_parent_child.png" alt="" srcset="">
     <hr>
     <div id="app">
         <child-component v-on:show-log="printText"></child-component>
     </div>
 
 </body>
-</html>
 
-
+</html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script>
+    //component 만들기
+    Vue.component("child-component", {
+        props: [],
+        data: function () {
+            return {}
+        },
+        template: `
+        <div>
+            <button v-on:click="showLog">show</button>
+        </div>
+        `,
+        methods: {
+            showLog: function (event) {
+                this.$emit('show-log', "인자1", "인자2")
+            }
+        },
+    })
+    new Vue({
+        el: "#app",
+        methods: {
+            printText: function (param1, param2) {
+                debugger;
+                console.log(param1, param2)
+            }
+        }
+    })
+</script>

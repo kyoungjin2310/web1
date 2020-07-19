@@ -20,9 +20,9 @@
     </style>
 
     <!-- vue 스크립트 플러그인 임포트   -->
-    
-    
-    
+
+
+
 </head>
 
 <body>
@@ -73,4 +73,54 @@
     </div>
 </body>
 
-</html>
+</html>
+<script src="https://unpkg.com/vue@2.5.16/dist/vue.js"> /* vue 플러그인 임포트 */</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"> /* axios : vue 비동기 처리 플러그인 임포트 */</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> /* jQuery library */</script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            message1: null,
+            message2: null,
+        },
+        methods: {
+            clickMenu1: function (event) {
+                axios({
+                    url: 'http://localhost:5050/html',  // 호출되는 서버 주소.
+                    methods: 'get',
+                    params: null,
+                    timeout: 30000,
+                    responseType: 'html',
+                })
+                    .then((res) => {
+                        console.log(res.data)
+                        this.$data.message1 = res.data;
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            },
+            clickMenu2: function (event) {
+                axios({
+                    url: 'http://localhost:5050/html',  // 호출되는 서버 주소.
+                    methods: 'get',
+                    params: null,
+                    timeout: 30000,
+                    responseType: 'html',
+                })
+                    .then((res) => {
+                        var $ul = $(res.data).filter("ul");
+                        this.$data.message2 = $($ul).html();
+                    })
+                    .catch((err) => {
+
+                    })
+            },
+            clickAlert: function (event) {
+
+            }
+        },
+
+    })
+</script>
